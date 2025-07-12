@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
             body: Center(
               child: ElevatedButton(
                 onPressed: () => context.go('/profile'),
-                child: Text('Go to Profile'),
+                child: const Text('Go to Profile'),
               ),
             ),
           );
@@ -25,3 +25,6 @@ class HomeView extends StatelessWidget {
     );
   }
 }
+
+
+
