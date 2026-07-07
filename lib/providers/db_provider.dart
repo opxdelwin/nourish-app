@@ -4,7 +4,6 @@ import '../backend/daos/meal_preferences_dao.dart';
 import '../backend/daos/food_log_dao.dart';
 import '../backend/daos/saved_recipe_dao.dart';
 import '../backend/models.dart';
-import '../backend/models/user_model.dart';
 
 class DbProvider extends ChangeNotifier {
   final UserDao _userDao = UserDao();

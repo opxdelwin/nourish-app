@@ -13,9 +13,16 @@ import 'theme/app_colors.dart';
 import 'backend/db_service.dart';
 import 'backend/hive_service.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    debugPrint('Warning: Could not load .env file: $e');
+  }
 
   // === UNIFIED DATABASE INITIALIZATION ===
   await DbService.instance.init();

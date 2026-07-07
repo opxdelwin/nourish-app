@@ -291,7 +291,20 @@ class _AiRecipesViewState extends State<AiRecipesView> with SingleTickerProvider
     final cookingStyles = ['Stir Fry', 'Curry', 'Sautéed', 'Baked', 'Fried'];
     final mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
-    return ChangeNotifierProvider(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (_showDetails) {
+          setState(() {
+            _showDetails = false;
+            _selectedRecipe = null;
+          });
+        } else {
+          context.go('/home');
+        }
+      },
+      child: ChangeNotifierProvider(
       create: (_) => AiRecipesViewModel(),
       child: Consumer<AiRecipesViewModel>(
         builder: (context, model, child) {
@@ -923,7 +936,7 @@ class _AiRecipesViewState extends State<AiRecipesView> with SingleTickerProvider
           );
         },
       ),
-    );
+    ),);
   }
 
   Widget _buildFigmaNutritionItem(BuildContext context, String label, String value, String unit) {

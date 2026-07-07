@@ -217,7 +217,7 @@ class _MacroField extends StatelessWidget {
             letterSpacing: 0,
           ),
           contentPadding: const EdgeInsets.only(top: 13, bottom: 13),
-          enabledBorder: _border(AppColors.coolGray.withOpacity(0.65)),
+          enabledBorder: _border(AppColors.coolGray.withValues(alpha: 0.65)),
           focusedBorder: _border(AppColors.primary),
         ),
       ),

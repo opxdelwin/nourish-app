@@ -104,7 +104,9 @@ class _GenderOption extends StatelessWidget {
         children: [
           Radio<String>(
             value: value,
+            // ignore: deprecated_member_use
             groupValue: model.selectedGender,
+            // ignore: deprecated_member_use
             onChanged: (value) {
               if (value == null) return;
               model.selectGender(value);

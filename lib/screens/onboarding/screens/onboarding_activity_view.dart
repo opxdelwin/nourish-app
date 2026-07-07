@@ -146,7 +146,7 @@ class _ActivityOptionsState extends State<_ActivityOptions> {
                       style: TextStyle(
                         color:
                             isSelected
-                                ? Colors.white.withOpacity(0.8)
+                                ? Colors.white.withValues(alpha: 0.8)
                                 : AppColors.mutedGray,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,

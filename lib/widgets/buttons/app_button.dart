@@ -55,7 +55,7 @@ class AppButton extends StatelessWidget {
             ],
           );
 
-    final VoidCallback? onPressedHandler = isLoading
+    final onPressedHandler = isLoading
         ? () {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(loadingMessage)),

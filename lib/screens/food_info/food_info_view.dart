@@ -34,9 +34,19 @@ class _FoodInfoViewState extends State<FoodInfoView> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => FoodInfoViewModel(),
-      child: Consumer<FoodInfoViewModel>(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go('/home');
+        }
+      },
+      child: ChangeNotifierProvider(
+        create: (_) => FoodInfoViewModel(),
+        child: Consumer<FoodInfoViewModel>(
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: Colors.white,
@@ -333,7 +343,7 @@ class _FoodInfoViewState extends State<FoodInfoView> {
           );
         },
       ),
-    );
+    ),);
   }
 
 }

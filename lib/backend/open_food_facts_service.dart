@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
 class FoodProduct {
   final String code;
@@ -89,7 +90,7 @@ class OpenFoodFactsService {
             .toList();
       }
     } catch (e) {
-      print('Error querying OpenFoodFacts API: $e');
+      debugPrint('Error querying OpenFoodFacts API: $e');
     }
     return [];
   }
@@ -110,7 +111,7 @@ class OpenFoodFactsService {
         }
       }
     } catch (e) {
-      print('Error querying OpenFoodFacts Barcode API: $e');
+      debugPrint('Error querying OpenFoodFacts Barcode API: $e');
     }
     return null;
   }

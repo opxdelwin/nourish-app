@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 import 'saved_recipes_model.dart';
 import '../../backend/models.dart';
@@ -232,8 +233,18 @@ class _SavedRecipesViewState extends State<SavedRecipesView> {
     final isDark = theme.brightness == Brightness.dark;
     final dbProvider = Provider.of<DbProvider>(context);
 
-    return ChangeNotifierProvider(
-      create: (_) => SavedRecipesViewModel(dbProvider),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
+        } else {
+          context.go('/home');
+        }
+      },
+      child: ChangeNotifierProvider(
+        create: (_) => SavedRecipesViewModel(dbProvider),
       child: Consumer<SavedRecipesViewModel>(
         builder: (context, model, child) {
           final recipes = model.savedRecipes;
@@ -241,6 +252,16 @@ class _SavedRecipesViewState extends State<SavedRecipesView> {
           return Scaffold(
             backgroundColor: isDark ? const Color(0xFF121212) : Colors.white,
             appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: isDark ? Colors.white : Colors.black),
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  } else {
+                    context.go('/home');
+                  }
+                },
+              ),
               title: Text(
                 'Saved Recipes',
                 style: TextStyle(
@@ -362,6 +383,6 @@ class _SavedRecipesViewState extends State<SavedRecipesView> {
           );
         },
       ),
-    );
+    ),);
   }
 }

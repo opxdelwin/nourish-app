@@ -6,10 +6,10 @@ class HorizontalDatePicker extends StatefulWidget {
   final ValueChanged<DateTime> onDateDecrement;
 
   const HorizontalDatePicker({
-    Key? key,
+    super.key,
     required this.onDateIncrement,
     required this.onDateDecrement,
-  }) : super(key: key);
+  });
 
   @override
   State<HorizontalDatePicker> createState() => _HorizontalDatePickerState();
@@ -63,7 +63,7 @@ class _HorizontalDatePickerState extends State<HorizontalDatePicker> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 6,
             offset: const Offset(0, 3),
           ),

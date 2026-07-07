@@ -21,8 +21,18 @@ class AboutUsView extends StatelessWidget {
     final paddingValue = screenWidth > 600 ? 32.0 : 24.0;
     final contentWidth = screenWidth > 600 ? 500.0 : double.infinity;
 
-    return Scaffold(
-      backgroundColor: isDark ? Colors.black : Colors.white,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go('/profile');
+        }
+      },
+      child: Scaffold(
+        backgroundColor: isDark ? Colors.black : Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -159,6 +169,6 @@ class AboutUsView extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ),);
   }
 }

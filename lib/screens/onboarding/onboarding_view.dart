@@ -48,8 +48,18 @@ class _OnboardingFlowState extends State<_OnboardingFlow> {
     final model = context.watch<OnboardingViewModel>();
     final dbProvider = context.read<DbProvider>();
 
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 220),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (model.currentStep > 0) {
+          model.previousStep();
+        } else {
+          context.go('/landing');
+        }
+      },
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 220),
       child: switch (model.currentStep) {
         0 => OnboardingNameView(
           key: const ValueKey('onboarding_name'),
@@ -111,6 +121,6 @@ class _OnboardingFlowState extends State<_OnboardingFlow> {
           },
         ),
       },
-    );
+    ),);
   }
 }

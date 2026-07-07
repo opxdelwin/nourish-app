@@ -17,7 +17,17 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final dbProvider = context.watch<DbProvider>();
 
-    return ChangeNotifierProvider(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          context.go('/home');
+        }
+      },
+      child: ChangeNotifierProvider(
       create: (_) {
         final model = ProfileViewModel();
         model.initFromDb(dbProvider.currentUser, dbProvider.mealPreferences);
@@ -276,6 +286,6 @@ class ProfileView extends StatelessWidget {
           );
         },
       ),
-    );
+    ),);
   }
 }

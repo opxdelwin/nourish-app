@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../backend/models.dart';
 import '../../providers/db_provider.dart';
-import '../../backend/models/user_model.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   bool _isEditMode = false;

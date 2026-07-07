@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../backend/models.dart';
 import '../../backend/open_food_facts_service.dart';
 import 'fallback_recipes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Local helper class to bridge the mock recipe list with SavedRecipeModel
 class Recipe extends SavedRecipeModel {
@@ -139,7 +140,7 @@ class AiRecipesViewModel extends ChangeNotifier {
     final mainIng = selectedIngNames.isNotEmpty ? selectedIngNames[0] : 'Fresh Veggies';
 
     try {
-      const apiKey = String.fromEnvironment('GEMINI_API_KEY');
+      final apiKey = dotenv.env['GEMINI_API_KEY'] ?? const String.fromEnvironment('GEMINI_API_KEY');
       if (apiKey.isEmpty) {
         throw Exception('GEMINI_API_KEY is not defined in environment variables.');
       }

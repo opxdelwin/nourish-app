@@ -5,6 +5,7 @@ class NutritionRow extends StatelessWidget {
   final TextStyle style;
   
   const NutritionRow({
+    super.key,
     required this.items,
     required this.style,
   });
